@@ -1,0 +1,9 @@
+#Now execute commands in below order to let terraform create the resources
+mkdir <somedir> && cd <somedir> #create a dir and perform everything inside that directory  
+
+$ terraform --version         # To check the terraform version
+$ terraform init              # After variables.tf and provider.tf execute this command to initialize the provider.
+$ terraform plan              # After variables.tf, provider.tf, deploy.tf and bootstrap.sh files execute this to check what all resources terraform will create. This will not create
+$ terraform apply             # Finally this will create all the resources on your provider (in our case openstack).
+$ terraform show              # It will show the metadata about the resources created. Like instance ip and other information.
+$ terraform destroy           #Catious, it will delete all the resources created above
