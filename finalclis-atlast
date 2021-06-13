@@ -21,3 +21,25 @@ $ terraform apply --auto-aprove    # this will print output: server_public_ip = 
 $ terraform destroy -target <resourcetype.resourcename>   ### resourcetype.resourcename can be obtained from terraform state list
 ## the above command will just delete particular resource from many available resources
 $ terraform apply -target <resourcetype.resourcename>    ### same it will just create this resource only and other will remain as it is 
+
+##VARIABLES
+#Variables can de defined anywhere in the main terraform file as below
+variable "name_of_var" {
+      description = "any description"             ##optional
+      default     = "some default value of var"   ##optional
+      type        = String                        ## optional
+ }
+ ## In order to use the value of the variable call it with "var.name_of_var"
+ ## If no value given and default value not given in that case it will prompt to enter value for the variable during terraform apply, during terraform destroy also but in that case providing the value will be based on relevnce
+ 
+ $ terraform apply -var "name_of_var=value_to_var"   ## to provide value in command line
+ 
+ ##mentioning variables in file default location is terraform.tfvars in the same dir
+ vi terraform.tfvars
+ name_of_var = "value_of_var"
+ 
+ $ terraform apply
+ ## If in case different file not terraform.tfvars then specify the custom.tfvars name during cli
+ $ terraform apply -var-file custom.tfvars 
+ 
+ ##Explore use of environment variables in terraform##
