@@ -7,3 +7,17 @@ $ terraform plan              # After variables.tf, provider.tf, deploy.tf and b
 $ terraform apply             # Finally this will create all the resources on your provider (in our case openstack).
 $ terraform show              # It will show the metadata about the resources created. Like instance ip and other information.
 $ terraform destroy           #Catious, it will delete all the resources created above
+$ terraform apply --auto-aprove   ## autoapproves (accept yes option) and executes directly
+$ terraform state list        # list of all the resources defined
+$ terraform state show <resourcename>    #details of particular defined resource
+##for terraform output some value use output resource define the resources as below which takes one value at a time so repeat multiple times
+##in the terraform tf resource definition file mention as below
+output "server_public_ip" {                 ###name given to this output resource
+    value = aws_eip.one.public_ip           ###aws_eip is the resource type one is the name of resource and public is the value of that type of resource###
+}
+##NOW
+$ terraform apply --auto-aprove    # this will print output: server_public_ip = the IP address comming from that resource  
+
+$ terraform destroy -target <resourcetype.resourcename>   ### resourcetype.resourcename can be obtained from terraform state list
+## the above command will just delete particular resource from many available resources
+$ terraform apply -target <resourcetype.resourcename>    ### same it will just create this resource only and other will remain as it is 
